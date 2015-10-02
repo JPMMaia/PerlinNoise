@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebGL - Perlin Noise Generator</title>
+
+    <!-- Common Includes -->
+    <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../Common/MV.js"></script>
+
+    <!-- Shaders -->
+    <script id="TextureVertexShader" type="x-shader/x-vertex">
+
+        struct MatrixBuffer
+        {
+            mat4 modelMatrix;
+            mat4 viewMatrix;
+            mat4 projectionMatrix;
+        };
+
+        uniform MatrixBuffer uMatrixBuffer;
+
+        attribute vec3 vPosition;
+        attribute vec2 vTextureCoordinates;
+
+        varying vec2 fTextureCoordinates;
+
+        void main()
+        {
+            fTextureCoordinates = vTextureCoordinates;
+
+            // Output position:
+            vec4 position = uMatrixBuffer.projectionMatrix * uMatrixBuffer.viewMatrix * uMatrixBuffer.modelMatrix * vec4(vPosition, 1.0);
+            gl_Position = position;
+        }
+
+    </script>
+    <script id="TextureFragmentShader" type="x-shader/x-fragment">
+
+        precision highp float;
+
+        varying vec2 fTextureCoordinates;
+
+        uniform sampler2D uTexture;
+
+        void main()
+        {
+            gl_FragColor = texture2D(uTexture, fTextureCoordinates);
+        }
+
+    </script>
+
+    <!-- Core Includes -->
+    <script type="text/javascript" src="Graphics/Utils/Utils.js"></script>
+    <script type="text/javascript" src="Graphics/Utils/VectorUtils.js"></script>
+    <script type="text/javascript" src="Graphics/Utils/RandomGenerator.js"></script>
+    <script type="text/javascript" src="Graphics/Utils/Subdivider.js"></script>
+    <script type="text/javascript" src="Graphics/Utils/GLBuffer.js"></script>
+    <script type="text/javascript" src="Graphics/Utils/GLIndexBuffer.js"></script>
+    <script type="text/javascript" src="Graphics/Models/Meshes/Triangle.js"></script>
+    <script type="text/javascript" src="Graphics/Models/Meshes/Square.js"></script>
+    <script type="text/javascript" src="Graphics/Models/Meshes/Sphere.js"></script>
+    <script type="text/javascript" src="Graphics/Models/Meshes/Cylinder.js"></script>
+    <script type="text/javascript" src="Graphics/Models/Meshes/Cone.js"></script>
+    <script type="text/javascript" src="Graphics/Textures/PaletteTexture.js"></script>
+    <script type="text/javascript" src="Graphics/Textures/PerlinNoise.js"></script>
+    <script type="text/javascript" src="Graphics/Textures/Texture.js"></script>
+    <script type="text/javascript" src="Graphics/Models/SimpleModel.js"></script>
+    <script type="text/javascript" src="Graphics/Models/TextureModel.js"></script>
+    <script type="text/javascript" src="Graphics/Shaders/AbstractShader.js"></script>
+    <script type="text/javascript" src="Graphics/Shaders/TextureShader.js"></script>
+    <script type="text/javascript" src="Graphics/Shaders/ShaderManager.js"></script>
+    <script type="text/javascript" src="Graphics/Components/CameraComponent.js"></script>
+    <script type="text/javascript" src="Graphics/Components/TransformComponent.js"></script>
+    <script type="text/javascript" src="Graphics/Components/PointLight.js"></script>
+    <script type="text/javascript" src="Graphics/Scene/Scene.js"></script>
+    <script type="text/javascript" src="Graphics/Graphics.js"></script>
+    <script type="text/javascript" src="Input/Keyboard.js"></script>
+    <script type="text/javascript" src="Input/Mouse.js"></script>
+    <script type="text/javascript" src="Application.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <link rel="stylesheet" href="CSS/main.css">
+
+</head>
+<body>
+
+    <!-- canvas gl-canvas -->
+    <canvas id="gl-canvas">
+        Your browser doesn't support the HTML5 canvas element!
+    </canvas>
+
+    <section id="Sidebar">
+
+        <form>
+
+            <label class="Text" for="RandomSeedInput">Random Seed</label>
+            <input id="RandomSeedInput" type="number" value="0" step="1">
+
+            <label class="Text" for="PersistenceInput">Persistence</label>
+            <input id="PersistenceInput" type="number" value="1.0" step="any" min="0.0001">
+
+            <label class="Text" for="OctavesInput">Octaves</label>
+            <input id="OctavesInput" type="number" value="4" step="1" min="1">
+
+            <label class="Text" for="SizeInput">Size</label>
+            <input id="SizeInput" type="number" value="512">
+
+            <button id="SaveImageButton" class="Button" type="button">Save Image</button>
+
+        </form>
+
+    </section>
+
+    <div id="GeneratingTextureContainer">
+        <label id="GeneratingTextureLabel" class="Text">Generating Texture</label>
+    </div>
+
+    <footer id="Signature" class="Text">Created by JPMMaia</footer>
+
+</body>
+</html>
