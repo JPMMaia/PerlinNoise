@@ -28,12 +28,28 @@ canvas
     border-radius: 2px;
 }
 
+.Form
+{
+    margin: 1.0em;
+}
+
 .Text
 {
     margin: 1.3em;
     letter-spacing: 0.08em;
     line-height: 1.4em;
     font-size: 1.0em;
+}
+
+.TextField
+{
+    background: rgba(0, 0, 0, 0);
+    color: rgba(255, 255, 255, 1.0);
+    text-align: center;
+    width: 30%;
+    float: right;
+    border: 2px solid rgba(38, 72, 161, 0.8);
+    border-radius: 2px;
 }
 
 #GeneratingTextureContainer
@@ -66,7 +82,7 @@ canvas
     color: rgba(255, 255, 255, 1.0);
     background: rgba(0, 0, 200, 0.1);
     border-right: 1px solid rgba(0, 0, 80, 0.8);
-    width: 15%;
+    width: 18%;
     height: 100%;
     position: absolute;
     left: 0;
@@ -83,4 +99,9 @@ canvas
     color: rgba(128, 128, 128, 0.5);
     font-size: 0.8em;
     margin: 0.5em;
+}
+
+#SizeNote
+{
+    font-size: 0.7em;
 }

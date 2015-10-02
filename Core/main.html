@@ -93,21 +93,27 @@
 
     <section id="Sidebar">
 
-        <form>
+        <form class="Form">
 
             <label class="Text" for="RandomSeedInput">Random Seed</label>
-            <input id="RandomSeedInput" type="number" value="0" step="1">
+            <input id="RandomSeedInput" class="TextField" type="number" value="0" step="1">
+            <br>
 
             <label class="Text" for="PersistenceInput">Persistence</label>
-            <input id="PersistenceInput" type="number" value="1.0" step="any" min="0.0001">
+            <input id="PersistenceInput" class="TextField" type="number" value="1.0" step="any" min="0.0001">
+            <br>
 
             <label class="Text" for="OctavesInput">Octaves</label>
-            <input id="OctavesInput" type="number" value="4" step="1" min="1">
+            <input id="OctavesInput" class="TextField" type="number" value="4" step="1" min="1">
+            <br>
 
-            <label class="Text" for="SizeInput">Size</label>
-            <input id="SizeInput" type="number" value="512">
+            <label class="Text" for="SizeInput">Size (px)</label>
+            <input id="SizeInput" class="TextField" type="number" value="512">
+            <label id="SizeNote" class="Text">Note: Size must be a power of 2</label>
+            <br>
 
             <button id="SaveImageButton" class="Button" type="button">Save Image</button>
+            <br>
 
         </form>
 

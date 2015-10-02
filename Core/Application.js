@@ -74,6 +74,11 @@ Application.prototype.setOctaves = function(value)
 };
 Application.prototype.setSize = function(value)
 {
+    // If the value is not a power of 2, ignore:
+    if((Math.log(value) / Math.log(2)) % 1 != 0)
+        return;
+
+
     this.size = value;
     this.dirty = true
 };
